@@ -26,4 +26,4 @@ Pseudo NOP
 - Examples
     - XCHG with self
     - ADD / SUB by 0 if flags are unimportant
-    - PUSH to / PULL from stack if stack and RSP is unimportant
+    - PUSH to / POP from stack if stack and RSP is unimportant
