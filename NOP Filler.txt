@@ -1,0 +1,29 @@
+Useful op-code and instruction prefix for x86_64 assembly when adding in filler bytes
+
+http://ref.x86asm.net/coder64.html#x90 (64 bit)
+https://modoocode.com/en/inst/nop
+http://xxeo.com/single-byte-or-small-x86-opcodes (32 bit)
+
+Single byte null prefix in 64 bit mode
+- 0x26
+- 0x2e
+- 0x36
+- 0x3e
+
+Proper NOP instructions
+- 0x90
+- 0x66 90
+- 0x0F 1F 00
+- 0x0F 1F 40 00
+- 0x0F 1F 40 00 00
+- 0x66 0F 1F 44 00 00
+- 0x0F 1F 80 00 00 00 00
+- 0x0F 1F 84 00 00 00 00 00
+- 0x66 0F 1F 84 00 00 00 00 00
+
+Pseudo NOP
+- Write valid instructions that do not affect the program state in a critical manner
+- Examples
+    - XCHG with self
+    - ADD / SUB by 0 if flags are unimportant
+    - PUSH to / PULL from stack if stack and RSP is unimportant
