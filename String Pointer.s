@@ -66,21 +66,44 @@ pop rdi
 # -------------------------------------------------- #
 
 # Get pointer to string in 8 bytes
-jmp str2
-code:
+jmp str1
+code1:
 pop rdi
+# <continue execution here>
 str1:
-call code
+call code1
 .asciz "ABCDEFGHIJ"
 
 # Get pointer to string in 7 bytes
-lea rdi, [rip + str1]
+lea rdi, [rip + str2]
+# <continue execution here>
 str2:
 .asciz "ABCDEFGHIJ"
 
+# Get pointer to string in 6 bytes
+# Must embed string directly at the position it is required
+call code2
+.asciz "ABCDEFGHIJ"
+code2:
+pop rdi
+# <continue execution here>
+
+# -------------------------------------------------- #
+# --------------------Conclusion-------------------- #
 # -------------------------------------------------- #
 
-# For length 1 ~ 9: use stack string
-# For length 10: use either stack string or LEA
-# For length 11 ~ 12: use stack string
-# For length 13+: use LEA
+# For length 1 ~ 4: use stack string
+# For length 5 ~ 6: use either stack string or in-place call
+# For length 7: use stack string
+# For length 8: use either stack string or in-place call
+# For length 9: use stack string
+# For length 10: use in-place call
+# For length 11: use either stack string or in-place call
+# For length 12: use stack string
+# For length 13+: use in-place call
+
+# Byte count formula for C-string of length n
+# stack string = floor((n-1) / 8) * 11 + [4, 7, 7, 7, 12, 13, 13, 15][(n-1) mod 8] (0-indexed list)
+# in-place call = n + 7
+# lea = n + 8
+# jmp call = n + 9
