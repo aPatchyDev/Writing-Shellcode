@@ -1,0 +1,4 @@
+- Accessing 32 bit subregister automatically clears the upper half
+- Pushing / Pulling 16 bit subregister misaligns the stack by 2 bytes
+- Cannot push / pull 32 bit subregister in 64 bit mode
+- Cannot push / pull RIP (use CALL / RET instead)
