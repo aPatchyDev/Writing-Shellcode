@@ -2,3 +2,4 @@
 - Pushing / Popping 16 bit subregister misaligns the stack by 2 bytes
 - Cannot push / pop 32 bit subregister in 64 bit mode
 - Cannot push / pop RIP (use CALL / RET instead)
+- scanf("%s") reads until a whitespace: (\x09, \x0a, \x0b, \x0c, \x0d, \x20) - Note that \x00 is not considered a delimiter
